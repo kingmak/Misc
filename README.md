@@ -1,5 +1,5 @@
-A repo that contains all my crazy (or useless) experiments
-==========================================================
+This repo contains all my crazy/useless experiments
+===================================================
 
-[(will soon clean my git and move appropriate repos here]
+[will soon clean my git and move appropriate repos here]
 
