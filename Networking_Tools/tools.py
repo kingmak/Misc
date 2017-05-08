@@ -17,6 +17,23 @@ __Author__ = 'KingMak'
 __Version__ = '0.1'
 
 ###################################################################################
+## Seperate Binary String by a specified length
+###################################################################################
+
+def binSep(binary, length = 4):
+	string = bin(binary)[2:]
+	strlen = (len(string))
+	chunks = []
+	index = 0
+
+	while index < strlen:
+		chunks.append(string[:length])
+		string = string[length:]
+		index += length
+
+	return ' '.join(chunks)
+
+###################################################################################
 ## Integer to Binary & Binary to Integer
 ###################################################################################
 
@@ -107,3 +124,8 @@ print binToIp(ipToBin('1.1.1.1'))
 print intToHex(97)
 print intToHex('97')
 print hexToInt('0x61')
+print binSep(0b11110101010100000)
+print binSep(0b111101010101000)
+print binSep(0b111101010101000000001)
+
+
