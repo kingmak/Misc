@@ -3,8 +3,10 @@ border = "|"
 dash = "-"
 space = " "
 
+
 def center(word, maxLength):
-    startIndex = maxLength / 2
+    startIndex = (maxLength / 2) - (len(word) / 2)
+    print(startIndex)
     cellString = [0] * maxLength
     
     index = 0
@@ -32,6 +34,6 @@ def lCell(word, maxLength):
 #top = "%s%s%s%s%s" % (corner, line * dashCount, border, line * dashCount, corner)
 #mid = "%s%s%s%s%s" % (border, space * dashCount, border, space * dashCount, border)
 #low = top
-print("%s%s%s" % (border, center("asdasd", 19), border))
+print("%s%s%s" % (border, center("aAAAAAAAAAAAAAAAAAAAAAAAA", 31), border))
 print(center("asd", 19))
-(lCell("a", 19))
+#(lCell("a", 19))
