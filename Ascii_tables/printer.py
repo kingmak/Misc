@@ -1,12 +1,24 @@
+import os
+
 corner = "+"
 border = "|"
 dash = "-"
 space = " "
 
+#########################################################################
+## The below 3 functions deal with word alignment for cells.
+#########################################################################
+
+def left(word, maxLength):
+    cellString = word + ((maxLength - len(word)) * space)
+    return cellString
+
+def right(word, maxLength):
+    cellString = left(word, maxLength)[::-1]
+    return cellString
 
 def center(word, maxLength):
     startIndex = (maxLength / 2) - (len(word) / 2)
-    print(startIndex)
     cellString = [0] * maxLength
     
     index = 0
@@ -23,17 +35,71 @@ def center(word, maxLength):
         
     return ''.join(cellString)
 
-def lCell(word, maxLength):
-    topString = "%s%s%s" % (corner, dash * maxLength, border)
-    cellString = "%s%s%s" % (border, center("asdasd", maxLength), border)
-    print(topString)
-    print(cellString)
-    
+#########################################################################   
+## getData gets lines from a csv type file
+#########################################################################
 
-#dashCount = maxLen + 2
-#top = "%s%s%s%s%s" % (corner, line * dashCount, border, line * dashCount, corner)
-#mid = "%s%s%s%s%s" % (border, space * dashCount, border, space * dashCount, border)
-#low = top
-print("%s%s%s" % (border, center("aAAAAAAAAAAAAAAAAAAAAAAAA", 31), border))
-print(center("asd", 19))
-#(lCell("a", 19))
+def getData(fileName):
+    data = []
+
+    with open(fileName) as inFile:
+        for line in inFile:
+            data.append(line.strip().split(','))
+    return data
+
+#########################################################################   
+## getMaxLengths gets max word length from each column
+#########################################################################
+
+def getMaxLengths(wordList):
+    maxLengths = [0] * len(wordList[0])
+
+    for List in wordList:
+        index = 0
+        for word in List:
+            if len(word) > maxLengths[index]:
+                maxLengths[index] = len(word)
+            index += 1
+    return maxLengths
+
+#########################################################################   
+## buildLine will create cells in a line with proper alignment
+#########################################################################
+
+def buildLine(words, maxLengths):
+    lineString = border
+    formatString = corner
+
+    index = 0
+    for word in words:
+        lineString += center(word, maxLengths[index])
+        lineString += border
+        formatString += (dash * maxLengths[index])
+        formatString += corner
+        index += 1
+
+    print(lineString)
+    print(formatString)
+
+#########################################################################  
+## main does the magic
+#########################################################################
+
+def main():
+    #os.system('python randWordGen.py')
+    lines = getData('MOCK_DATA.csv')
+    maxs = getMaxLengths(lines)
+
+    index = 0
+    formatString = corner
+
+    for word in lines[0]:
+        formatString += (dash * maxs[index])
+        formatString += corner
+        index += 1
+
+    print(formatString) # the first line
+    for line in lines:
+        buildLine(line, maxs)
+
+main()
