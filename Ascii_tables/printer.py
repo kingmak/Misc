@@ -2,13 +2,14 @@ import os
 
 #########################################################################
 ## TODO:
-## right justified broken, fix it
+## add more structure to code
+## add oop?
 #########################################################################
 
 corner = "+"
 border = "|"
-dash = "-"
-space = " "
+dash   = "-"
+space  = " "
 
 #########################################################################
 ## The below 3 functions deal with word alignment for cells.
@@ -19,7 +20,7 @@ def left(word, maxLength):
     return cellString
 
 def right(word, maxLength):
-    cellString = left(word, maxLength)[::-1]
+    cellString = ((maxLength - len(word)) * space) + word
     return cellString
 
 def center(word, maxLength):
@@ -77,7 +78,7 @@ def buildLine(words, maxLengths):
 
     index = 0
     for word in words:
-        lineString += center(word, maxLengths[index])
+        lineString += right(word, maxLengths[index])
         lineString += border
         formatString += (dash * maxLengths[index])
         formatString += corner
